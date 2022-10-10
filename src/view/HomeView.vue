@@ -1,15 +1,13 @@
 <template>
-    <NavBarComponent title="Dominik Hoffmann" class='nav-bar'></NavBarComponent>
-    <ContentComponent></ContentComponent>
+    <BasicLayoutComponent title="Dominik Hoffmann"></BasicLayoutComponent>
     
 </template>
 <script>
-    import NavBarComponent from '../components/NavBarComponent'
-    
-    import ContentComponent from '../components/ContentComponent'
+    import BasicLayoutComponent from '../components/BasicLayoutComponent.vue'
+
     export default {
     name: 'HomeView',
-    components: { NavBarComponent, ContentComponent },
+    components: { BasicLayoutComponent },
 
     mounted () {
         console.log('home init')
@@ -18,7 +16,5 @@
 
 </script>
 <style>
-.nav-bar{
-    padding-bottom: 0;
-}
+
 </style>
