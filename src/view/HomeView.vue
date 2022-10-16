@@ -1,13 +1,18 @@
 <template>
-    <BasicLayoutComponent title="Dominik Hoffmann"></BasicLayoutComponent>
-    
+   
+        <NavBarComponent title="Dominik Hoffmann"></NavBarComponent>
+        
+        
+   
+
+
 </template>
 <script>
-    import BasicLayoutComponent from '../components/BasicLayoutComponent.vue'
+import NavBarComponent from '@/components/NavBarComponent.vue';
 
     export default {
     name: 'HomeView',
-    components: { BasicLayoutComponent },
+    components: {  NavBarComponent },
 
     mounted () {
         console.log('home init')
