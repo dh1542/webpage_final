@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../view/HomeView.vue'
 import ProjectsView from '../view/ProjectsView.vue'
+import ExchangeRateCalculatorView from '../view/ExchangeRateCalculatorView.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/projects',
     name: 'projects',
     component: ProjectsView
+  },
+  {
+    path: '/exchangeRate',
+    name: 'exchangeRateCalculatorView',
+    component: ExchangeRateCalculatorView
   }
   
 ]
