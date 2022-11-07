@@ -3,7 +3,7 @@
     <q-toolbar class="bg-primary text-white  shadow-2">
       <q-btn flat round dense icon="menu" class="q-mr-sm" />
       <q-separator dark vertical inset />
-      <q-btn stretch flat label="Dominik Hoffmann" />
+      <q-btn  to="/" stretch flat label="Dominik Hoffmann" />
 
       <q-space />
 
