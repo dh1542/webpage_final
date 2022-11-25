@@ -8,18 +8,28 @@
           <q-input rounded outlined type="number" v-model="amount" bg-color="white"/> 
         </div>
         <div class="currency-selector">
-          <q-select filled bg-color="white" v-model="model" :options="currencies" label="Choose Currency">
-             <template v-slot:option="scope">
-                <q-item>
+          <q-select filled bg-color="white"
+                    v-model="fromCurrencySelection"
+                    :options="currencies"
+                    :display-value="getDisplayValue()"
+                    label="Choose Currency"
+                    color="lightgrey"
+                    options-selected-class="text-deep-orange"
+                   >
+             <template v-slot:option="scope" >
+                <q-item v-bind="scope.itemProps.valueOf()" >
+                <q-item-section style=" margin: 0; padding: 10px">
+                  <img :src="this.getFlagForCountry(scope.opt.country)"
+                         width="40"
+                         height="30"
+                         style="margin-right: auto; border: #1D1D1D solid 1px">
+                </q-item-section>
                 <q-item-section>
-                  <div class="currency-option">
-                    <div class="ImageWrapper" :style="this.getFlagForCountry(scope.opt.country)">
-                      
-                    </div>
-                  <q-item-label>{{ scope.opt.name }}</q-item-label>
 
-                  <q-item-label>{{ scope.opt.sign }}</q-item-label>
-                  </div>
+                  <q-item-label >{{ scope.opt.value }} <span style="font-weight: bold; font-size: 150%">{{scope.opt.sign}}</span></q-item-label>
+
+
+
                   
               </q-item-section>
               </q-item>
@@ -34,46 +44,54 @@
 </template>
 <script>
 import NavBarComponent from "@/components/NavBarComponent.vue";
-
+import { ref } from 'vue'
 export default {
   name: "ExhangeRateTool",
   components: { NavBarComponent },
+  setup() {
+      return{
+        fromCurrencySelection: ref(null),
+        amount: 0,
+
+        currencies: [
+          {
+            value: "United States Dollar",
+            country: "us",
+            currency: "USD",
+            sign: "$"
+
+          },
+          {
+            value: "Euro",
+            country: "eu",
+            currency: "EUR",
+            sign: "€"
+          },
+          {
+            value: "Russian Rubles",
+            country: "ru",
+            currency: "RUB",
+            sign: "₽"
+          },
+          {
+            value: "Chinese Renminbi",
+            country: "cn",
+            currency: "CNY",
+            sign: "¥"
+          },
+          {
+            value: "Japanese Yen",
+            country: "jp",
+            currency: "JPY",
+            sign: "¥"
+          }
+
+        ]
+      }
+  },
   data() {
     return {
-      currencies: [
-        {
-          name: "United States Dollar",
-          country: "US",
-          currency: "USD",
-          sign: "$"
-        
-        },
-        {
-          name: "Euro",
-          country: "EU",
-          currency: "EUR",
-          sign: "€"
-        },
-        {
-          name: "Russian Rubles",
-          country: "RU",
-          currency: "RUB",
-          sign: "₽"
-        },
-        {
-          name: "Chinese Renminbi",
-          country: "CN",
-          currency: "CNY",
-          sign: "¥"
-        },
-        {
-          name: "Japanese Yen",
-          country: "JPN",
-          currency: "JPY",
-          sign: "¥"
-        } 
-
-      ]
+        unused: 0
     }
   },
   mounted() {
@@ -81,12 +99,23 @@ export default {
   },
   methods: {
     getFlagForCountry(countryID){
-      console.log(countryID)
-      let style = {}
-      let flagURL = "https://flagcdn.com/w40/"+ countryID  +".png";
-      style.backgroundImage = "url('" +  flagURL +  "')";
-      console.log(style)
-      return style;
+      return "https://flagcdn.com/w40/"+ countryID  +".png";
+    },
+    getDisplayValue(){
+      if(this.fromCurrencySelection == null){
+        return "Select Currency";
+      }
+      else{
+        return this.fromCurrencySelection.value + " " + this.fromCurrencySelection.sign
+      }
+    }
+  },
+  watch: {
+    fromCurrencySelection(selection){
+      if(selection != null){
+        console.log(selection.value)
+
+      }
     }
   }
  
@@ -136,14 +165,7 @@ export default {
 .input-field{
   width: 20rem;
 }
-.currency-option{
-  display: flex;
- align-content: flex-start;
- 
-}
-.ImageWrapper{
-  width: 20;
-}
+
 
 html{
   background-color: gainsboro;
