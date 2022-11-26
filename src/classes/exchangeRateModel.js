@@ -45,7 +45,7 @@ class ExchangeRateModel{
         if(this.dateOfLastFetch == null){
             return true
         }
-        let fetchDueDate = this.dateOfLastFetch.setDate(this.dateOfLastFetch.getDate() + timeBetweenFetches);
+        let fetchDueDate = this.dateOfLastFetch + timeBetweenFetches;
         let currentDate = Date.now()
         return currentDate > fetchDueDate;
     }
@@ -69,6 +69,28 @@ class ExchangeRateModel{
             console.warn("Fetching of exchange rates failed!! Converter will not work without!")
         }
         return rates
+    }
+
+    async convertCurrencies(amount, fromCurrency, toCurrency){
+        console.log(amount + " " + fromCurrency  + " to " + toCurrency)
+        let rates = await this.getExchangeRates();
+
+
+        // convert to eur
+        let exchangeRateFrom = rates.rates[fromCurrency]
+        if(exchangeRateFrom == null){
+            console.error("The wished conversion from " + fromCurrency + " is not available somehow!!")
+            return null
+        }
+        let amountInEuros = amount / exchangeRateFrom;
+        let exchangeRateTo = rates.rates[toCurrency]
+        if(exchangeRateTo == null){
+            console.error("The wished conversion to " + toCurrency + " is not available somehow!!")
+        }
+
+        return amountInEuros * exchangeRateTo;
+
+
     }
 }
 

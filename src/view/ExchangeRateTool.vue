@@ -37,15 +37,15 @@
         </div>
       </div>
       <div class="center-buttons button-section">
-        <q-btn id="convert-button" push color="white" text-color="black" icon="autorenew" padding="lg"/>
-        <q-btn id="switch-button" push color="white" text-color="black" icon="swap_vert" padding="lg"/>
+        <q-btn id="convert-button" push color="white" text-color="black" icon="autorenew" padding="lg" @click="convertAmount()"/>
+        <q-btn id="switch-button" push color="white" text-color="black" icon="swap_vert" padding="lg" @click="switchCurrencies()"/>
 
       </div>
       <div class="output-section">
         <div class="input-field">
           <q-field filled rounded bg-color="white">
             <template v-slot:control>
-              <div class="full-width "></div>
+              <div class="full-width ">{{convertedAmount}}</div>
             </template>
 
           </q-field>
@@ -88,6 +88,7 @@ import ExchangeRateModel from '../classes/exchangeRateModel'
 import NavBarComponent from "@/components/NavBarComponent.vue";
 import {ref} from 'vue'
 
+
 export default {
   name: "ExhangeRateTool",
   components: {NavBarComponent},
@@ -95,7 +96,8 @@ export default {
     return {
       fromCurrencySelection: ref(null),
       toCurrencySelection: ref(null),
-      amount: 0,
+      amount: ref(null),
+      convertedAmount: ref(null),
 
       currencies: [
         {
@@ -180,6 +182,22 @@ export default {
         return "Select Currency";
       } else {
         return this.toCurrencySelection.value + " " + this.toCurrencySelection.sign
+      }
+    },
+    async convertAmount(){
+      if(this.isConversionPossible()){
+        this.convertedAmount = await this.exchangeRateModel.convertCurrencies(this.amount, this.fromCurrencySelection.currency, this.toCurrencySelection.currency)
+      }
+    },
+    isConversionPossible(){
+      return (this.amount != null && this.fromCurrencySelection != null && this.toCurrencySelection != null)
+    },
+    switchCurrencies(){
+      let fromSelectionTemp = this.fromCurrencySelection
+      this.fromCurrencySelection = this.toCurrencySelection
+      this.toCurrencySelection = fromSelectionTemp
+      if(this.isConversionPossible()){
+        this.convertAmount()
       }
     }
   },
