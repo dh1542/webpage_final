@@ -43,6 +43,7 @@
   </div>
 </template>
 <script>
+import ExchangeRateModel from '../classes/exchangeRateModel'
 import NavBarComponent from "@/components/NavBarComponent.vue";
 import { ref } from 'vue'
 export default {
@@ -91,10 +92,15 @@ export default {
   },
   data() {
     return {
+        exchangeRateModel : new ExchangeRateModel,
         unused: 0
     }
   },
-  mounted() {
+  async mounted() {
+
+    let exrm = await this.exchangeRateModel.fetchExchangeRate();
+
+    console.log(exrm)
     console.log("home init");
   },
   methods: {
