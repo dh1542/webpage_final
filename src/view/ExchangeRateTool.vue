@@ -1,5 +1,5 @@
 <template>
-  <NavBarComponent title="Dominik Hoffmann"></NavBarComponent>
+  <NavBarComponent title="Currency Converter"></NavBarComponent>
   <div class="container">
     <div class="Toolbox">
       <h2 id="ERT-Header">Currency Converter</h2>
@@ -213,84 +213,6 @@ export default {
 };
 </script>
 <style>
-#ERT-Header {
-  text-align: center;
-  width: 40rem;
-  background-color: #049a30;
-  font-weight: 700;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-text-stroke: 1.5px white;
-  border-radius: 5%;
-  margin-top: 1%;
+@import "../styles/currencyConverterStyle.css";
 
-
-}
-
-.container {
-  margin-top: 5%;
-  display: flex;
-  justify-content: center;
-}
-
-.Toolbox {
-  display: flex;
-
-  flex-direction: column;
-
-  height: 50rem;
-  width: 100rem;
-  background-image: url("https://www.publicdomainpictures.net/pictures/400000/nahled/image-16183020011ky.png");
-  border-radius: 2%;
-}
-
-.input-section {
-  display: flex;
-  justify-content: space-evenly;
-  padding-top: 2%;
-
-
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.currency-selector {
-  margin-left: 10px;
-  width: 25rem;
-}
-
-.input-field {
-  width: 20rem;
-}
-
-.output-section {
-  display: flex;
-  justify-content: space-evenly;
-  padding-top: 4%;
-
-
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.button-section {
-  display: flex;
-  align-content: space-between;
-  padding-top: 4%;
-  margin-left: 30%;
-  margin-right: 30%;
-}
-
-#switch-button {
-  margin-left: 20%;
-}
-
-#convert-button {
-  margin-right: 20%;
-}
-
-
-html {
-  background-color: gainsboro;
-}
 </style>
