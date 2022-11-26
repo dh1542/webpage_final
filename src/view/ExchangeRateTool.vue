@@ -98,7 +98,7 @@ export default {
   },
   async mounted() {
 
-    let exrm = await this.exchangeRateModel.fetchExchangeRate();
+    let exrm = await this.exchangeRateModel.getExchangeRates();
 
     console.log(exrm)
     console.log("home init");
